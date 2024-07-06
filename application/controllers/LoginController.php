@@ -9,8 +9,11 @@ class LoginController extends CI_Controller {
 		$this->load->model('Loginmodel');
 	}
 
+	/*In this Controller Code Explain if user successfully entered ther credentials. directy redirect to Students data page*/ 
+
 	public function index()
 	{
+		// Validating the user Credentails 
 
 		$this->form_validation->set_rules('email','Email','required|trim');
 		$this->form_validation->set_rules('password','Password ','required|trim');
@@ -23,6 +26,9 @@ class LoginController extends CI_Controller {
 
 				if($check){
 					$this->session->set_flashdata('success', 'Login Successful.');
+
+					// if User Succesfully Login Direct loading page of Students Data
+
 					redirect('StudentsController/index');
 				}else{
 					$this->session->set_flashdata('Error' , 'Invalid Login Details');
