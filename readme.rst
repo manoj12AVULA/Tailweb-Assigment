@@ -1,71 +1,129 @@
-###################
-What is CodeIgniter
-###################
+# Teacher Portal Project
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+This project is a web application for teachers to manage student data. It includes functionalities for teachers to log in, view a list of all students, and perform CRUD (Create, Read, Update, Delete) operations on student data. The project uses HTML, CSS, JavaScript, and the CodeIgniter framework.
 
-*******************
-Release Information
-*******************
+## Table of Contents
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Database Schema](#database-schema)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+## Features
+- **Teacher Login:** Secure login functionality for teachers.
+- **Student Management:** View, add, edit, and delete student details.
+- **Responsive Design:** Styled with CSS for a responsive user interface.
 
-**************************
-Changelog and New Features
-**************************
+## Technologies Used
+- **Frontend:**
+  - HTML
+  - CSS
+  - JavaScript
+- **Backend:**
+  - PHP
+  - CodeIgniter Framework
+- **Database:**
+  - MySQL
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+## Database Schema
 
-*******************
-Server Requirements
-*******************
+### Table: `user_details`
+| Column Name | Data Type | Description |
+|-------------|------------|-------------|
+| `id`        | INT        | Primary Key |
+| `Email`  | VARCHAR    | Teacher's username |
+| `password`  | VARCHAR    | Teacher's password (hashed) |
 
-PHP version 5.6 or newer is recommended.
+### Table: `students_details`
+| Column Name    | Data Type | Description          |
+|----------------|------------|----------------------|
+| `id`           | INT        | Primary Key          |
+| `name`         | VARCHAR    | Student's name       |
+| `subject_name`        | VARCHAR    | Student's Subject Name      |
+| `marks`        | VARCHAR    | Student's Marks      |
+| `Upated_at`      | VARCHAR    | Update Student Data    |
+| `delete_At`| VARCHAR       | Delets Student Data |
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+## Installation
 
-************
-Installation
-************
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/manoj12AVULA/Tailweb-Assigment.git
+    ```
 
-Please see the `installation section <https://codeigniter.com/userguide3/installation/index.html>`_
-of the CodeIgniter User Guide.
+2. Navigate to the project directory:
+    ```bash
+    cd Tailweb-Assigment
+    ```
 
-*******
-License
-*******
+3. Install the necessary dependencies:
+    ```bash
+    composer install
+    ```
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+4. Set up your database and import the provided SQL files to create the necessary tables.
 
-*********
-Resources
-*********
+5. Configure the database settings in `application/config/database.php`:
+    ```php
+    $db['default'] = array(
+        'dsn'   => '',
+        'hostname' => 'localhost',
+        'username' => 'your_db_username',
+        'password' => 'your_db_password',
+        'database' => 'your_db_name',
+        'dbdriver' => 'mysqli',
+        'dbprefix' => '',
+        'pconnect' => FALSE,
+        'db_debug' => (ENVIRONMENT !== 'production'),
+        'cache_on' => FALSE,
+        'cachedir' => '',
+        'char_set' => 'utf8',
+        'dbcollat' => 'utf8_general_ci',
+        'swap_pre' => '',
+        'encrypt' => FALSE,
+        'compress' => FALSE,
+        'stricton' => FALSE,
+        'failover' => array(),
+        'save_queries' => TRUE
+    );
+    ```
 
--  `User Guide <https://codeigniter.com/docs>`_
--  `Contributing Guide <https://github.com/bcit-ci/CodeIgniter/blob/develop/contributing.md>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
+6. Start the server using XAMPP or any other local server setup.
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
+## Usage
 
-***************
-Acknowledgement
-***************
+1. Open your web browser and navigate to the project's URL, typically `http://localhost/Tailweb-Assigment`.
 
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+2. Log in using the credentials from the `user_details` table.
+
+3. Manage student data using the provided interface.
+
+## Examples
+
+### Adding a New Student
+
+1. Click on the "Add Student" button.
+2. Fill out the form with the student's details.
+3. Click "Submit" to save the new student to the database.
+
+### Editing Student Details
+
+1. Click on the "Edit" button next to the student's name.
+2. Update the student's information in the form.
+3. Click "Update" to save the changes.
+
+### Deleting a Student
+
+1. Click on the "Delete" button next to the student's name.
+2. Confirm the deletion in the popup dialog.
+
+## Contributing
+
+Contributions are welcome! Please fork this repository and submit pull requests for any improvements or bug fixes.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
