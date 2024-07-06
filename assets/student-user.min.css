@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&amp;display=swap");
+
+body {
+
+	margin: 0px;
+	font-family: sans-serif;
+}
+
+.login-main-container{
+	height: 100vh;
+	background-color:#d9d8d4;
+}
+
+
+
+.main-heading{
+	font-size: 25px;
+	text-align: center;
+	color: #c21728;
+	font-family: "Copperplate";
+	font-weight: 700px;
+}
+
+#form{
+	width: 50%;
+	background-color: #ffffff;
+	border-radius: 5px;
+}
+
+.login-button{
+	background-color: #172b45;
+	border-radius: 10px;
+	color: #ffffff;
+	height: 40px;
+	width: 80px;
+}
+/*Table styling*/
+
+.main-table-container{
+	background-color: #aba9a9;
+}
+
+.table-data{
+	font-family: sans-serif;
+}
+
+.table-heading{
+	font-size: 50px;
+	text-align: center;
+	font-family: serif;
+	text-shadow: 3px 0px 2px #000000;
+}
+
+
+.logout-button{
+	font-family: sans-serif;
+	width: 100px;
+	height: 100px;
+}
+
+.greater-markers{
+	color: green;
+}
+
+/*Add Student Button*/
+
+.add-student-button{
+	width: 50px;
+	height: 20px;
+	background-color: #327fa8;
+}
+
