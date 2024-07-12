@@ -6,7 +6,8 @@ class LoginController extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 
-		$this->load->model('Loginmodel');
+		$this->load->model('LoginModel');
+		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 	}
 
 	/*In this Controller Code Explain if user successfully entered ther credentials. directy redirect to Students data page*/ 
@@ -19,29 +20,30 @@ class LoginController extends CI_Controller {
 		$this->form_validation->set_rules('password','Password ','required|trim');
 
 		if($this->form_validation->run()){
-			$data = $this->input->post();
 
-			if(!empty($data)){
-				$check = $this->Loginmodel->index($data);
+			$form_data = $this->input->post();
+
+			if(!empty($form_data)){
+
+				$check  = $this->LoginModel->login_user($form_data);
 
 				if($check){
-					$this->session->set_flashdata('success', 'Login Successful.');
+					$this->session->set_userdata('login_user',mt_rand(11111,99999));
+					
+					$this->session->set_tempdata('loginSuccess', "Login Successfull", 3);
 
-					// if User Succesfully Login Direct loading page of Students Data
-
-					redirect('StudentsController/index');
+					redirect('student-details');
 				}else{
-					$this->session->set_flashdata('Error' , 'Invalid Login Details');
+					false;
 				}
-
-			}else{
-				$this->load->view('login');
 			}
-			
+		}else{
+			 $this->load->view('login');
 		}
 
 
 
 		
-	}
+}
+
 }

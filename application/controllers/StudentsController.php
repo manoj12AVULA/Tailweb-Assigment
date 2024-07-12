@@ -1,4 +1,7 @@
 <?php
+
+error_reporting(E_ALL & ~E_NOTICE); // Report all except notices
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class StudentsController extends CI_Controller {
@@ -10,20 +13,25 @@ class StudentsController extends CI_Controller {
 
 	}
 
-	public function index(){
+	public function student_data(){
 
 
 		$data['students'] = $this->StudentsModel->student_data();
+		$data['student_user'] = null;
 		
 		if(!empty($data['students'])){
 
 			$this->load->view('students_details',$data);
+
 		}else{
 			return false;
 		}
 	}
 
-	public function update_user(){
+	public function update_user($id){
+
+		
+		null;
 		
 	}
 
@@ -35,7 +43,7 @@ class StudentsController extends CI_Controller {
 
 		if($delete){
 			$this->session->set_flashdata('deleteSuccess',"Details Removed Successfully");
-			redirect('StudentsController/index');
+			redirect('student-details');
 		}else{
 			$this->session->set_flashdata('deleteError',"Check Data");
 			return false;

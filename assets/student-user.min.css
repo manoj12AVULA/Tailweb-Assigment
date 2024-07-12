@@ -7,14 +7,14 @@ body {
 }
 
 .login-main-container{
-	height: 100vh;
+	
 	background-color:#d9d8d4;
 }
 
 
 
 .main-heading{
-	font-size: 25px;
+	font-size: 35px;
 	text-align: center;
 	color: #c21728;
 	font-family: "Copperplate";
@@ -51,7 +51,13 @@ body {
 	text-shadow: 3px 0px 2px #000000;
 }
 
+.table-out{
+	display: block;
+}
 
+.table-in{
+	display: none;
+}
 .logout-button{
 	font-family: sans-serif;
 	width: 100px;

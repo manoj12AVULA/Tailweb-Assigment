@@ -11,7 +11,7 @@ class StudentsModel extends CI_Model {
 
 		$query = $this->db->get('students_details');
 
-		if($query->row()){
+		if($query->num_rows()){
 			return $query->result();
 		}else{
 			return false;
@@ -24,6 +24,26 @@ class StudentsModel extends CI_Model {
 		}else{
 			return false;
 		}
+	}
+
+	public function total_rows(){
+		$q = $this->db->get('students_details');
+
+		if($q->num_rows()){
+			return  $q->num_rows();
+		}else{
+			return false;
+		}
+	}
+
+	public function update_student($student_id){
+		// $q =$this->db->where('id',$student_id)->get('students_details');
+
+		// if($q->num_rows()){
+		// 	return $q->row();
+		// }else{
+		// 	false;
+		// }
 	}
 
 	public function delete_student($student_id){

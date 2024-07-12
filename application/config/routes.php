@@ -51,7 +51,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'LoginController';
 $route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
-$route['student-details'] = 'StudentsController';
+$route['translate_uri_dashes'] = TRUE;
+$route['student-details'] = 'StudentsController/student_data';
 $route['add-student'] = 'StudentsController/add_student'; //For Add user
 $route['delete-user/(:any)'] = 'StudentsController/delete_user/$1';  //For delete user
+$route['register-user'] = 'RegisterController';
+$route['logout'] = 'LogoutController';
