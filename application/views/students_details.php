@@ -24,29 +24,30 @@
 			<?php if($this->session->tempdata('loginSuccess')) { ?>
 
 				<div class="alert alert-success">
-					<?= $this->session->tempdata('loginSuccess') ?>
+					<?=  $this->session->tempdata('loginSuccess') ;?>
 				</div>
 
 			<?php } ?>
-			<?php if($this->session->flashdata('deleteSuccess')) { ?>
+
+			<?php if($this->session->tempdata('deleteSuccess')) { ?>
 
 				<div class="alert alert-danger">
-					<?php $this->session->flashdata('deleteSuccess') ?>
+					<?php echo $this->session->tempdata('deleteSuccess'); ?>
 				</div>
 
 			<?php } ?>
-			<?php if($this->session->flashdata('userAdd')) { ?>
+			<?php if($this->session->tempdata('userAdd')) { ?>
 
 				<div class="alert alert-success">
-					<?php $this->session->flashdata('userAdd') ?>
+					<?php echo $this->session->tempdata('userAdd'); ?>
 				</div>
 
 			<?php } ?>
 
-			<?php if($this->session->flashdata('AddError')) { ?>
+			<?php if($this->session->tempdata('AddError')) { ?>
 
 				<div class="alert alert-danger">
-					<?php $this->session->flashdata('AddError') ?>
+					<?php echo $this->session->tempdata('AddError'); ?>
 				</div>
 
 			<?php } ?>
@@ -58,11 +59,14 @@
 
 
 				<!-- -->
-				<div class="p-4 d-flex flex-row justify-content-end">
-					<a href="LogoutController/logout" class="btn btn-danger"> Logout</a>
+				<div class="p-4 d-flex flex-row justify-content-between">
+					<p class="justify-content-start"><?php echo $links; ?></p>
+				
+					
+					<a href="LogoutController/logout" class="btn btn-danger text-center"> Logout</a>
+						
 					
 				</div>
-				
 				
 				<div class="table-data">
 				<table class="table table-hover table-data text-center">
@@ -77,10 +81,14 @@
 					</thead>
 					<tbody class="table-hover table-group-divider">
 
-						<?php foreach ($students as $value) { ?>
+						<?php 
+
+						if(!empty($students)){
+
+							foreach ($students as $value) { ?>
 							
 							<tr>
-								<td><?= $value->id?></td>
+								<td><?= $value->id - 1?></td>
 
 								<td contenteditable="true" data-field="name"><?= $value->name?></td>
 								
@@ -118,7 +126,16 @@
 								</td>
 							</tr>
 
-						<?php }?>
+						<?php } } else { ?>
+
+							<tr>
+								<td colspan="5">No Data Found</td>
+							</tr>
+					<?php }?>
+
+						
+
+						
 						
 					</tbody>
 				</table>
@@ -147,8 +164,8 @@
                 
 
                 <?php 
-                $attribit = array('id'=>'addStudentForm');
-                echo form_open(base_url('StudentsController/add_student'),$attribit)?>
+                
+                echo form_open(base_url('StudentsController/add_student'))?>
                     <div class="mb-3">
 
 
@@ -163,55 +180,13 @@
                         <label for="marks" class="form-label">Marks</label>
                         <input type="number" class="form-control" id="marks" name="marks" required>
                     </div>
-                    <button type="submit" class="btn add-student-button">Add Student</button>
+                    <button type="submit" class="btn btn-primary">Add Student</button>
                 <?php echo form_close();?>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="modal fade" id="UpdateStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addStudentModalLabel">Add Student</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                
-
-                <?php 
-                
-                
-                echo form_open(base_url('StudentsController/update_student'))?>
-
-               
-                    <div class="mb-3">
-                    	<input type="hidden" id="update_id" name="id">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" value=""  id="Upname"  required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="subject" class="form-label">Subject</label>
-                        <input type="text" class="form-control"  id="Upsubject" name="subject"required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="marks" class="form-label">Marks</label>
-                        <input type="number" class="form-control" id="Upmarks" name="marks" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary ">Update</button>
-                    
-                <?php 
-                echo form_close();
-            	
-
-                ?>
-
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -254,7 +229,7 @@
                     })
                         .then(response => response.json())
                         .then(data => {
-                            window.print(data);
+                            alert('updating student');
                         })
                         .catch(error => {
                             console.error('Error:', error);

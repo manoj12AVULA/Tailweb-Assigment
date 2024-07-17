@@ -16,22 +16,57 @@ class StudentsController extends CI_Controller {
 	public function student_data(){
 
 
-		$data['students'] = $this->StudentsModel->student_data();
-		$data['student_user'] = null;
 		
-		if(!empty($data['students'])){
 
-			$this->load->view('students_details',$data);
+		$config = array();
+          $config["base_url"] = base_url('/StudentsController/student_data');
+          $config["total_rows"] = $this->db->count_all('students_details');
+          $config["per_page"] = 10;
+         $config["uri_segment"] = 3;
 
-		}else{
-			return false;
-		}
+
+         $config['full_tag_open'] = '<nav aria-label="Page navigation example"><ul class="pagination justify-content-start">';
+	    $config['full_tag_close'] = '</ul></nav>';
+	    $config['num_tag_open'] = '<li class="page-item">';
+	    $config['num_tag_close'] = '</li>';
+	    $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+	    $config['cur_tag_close'] = '</a></li>';
+	    $config['next_tag_open'] = '<li class="page-item">';
+	    $config['next_tag_close'] = '</li>';
+	    $config['prev_tag_open'] = '<li class="page-item">';
+	    $config['prev_tag_close'] = '</li>';
+	    $config['first_tag_open'] = '<li class="page-item">';
+	    $config['first_tag_close'] = '</li>';
+	    $config['last_tag_open'] = '<li class="page-item">';
+	    $config['last_tag_close'] = '</li>';
+	    $config['attributes'] = array('class' => 'page-link');
+
+	    $config['prev_link'] = '&laquo; Previous';
+	    $config['next_link'] = 'Next &raquo;';
+
+
+
+
+         $this->per_page=$config["per_page"]; 
+         $this->pagination->initialize($config);  
+
+          $segment = $this->uri->segment(3);
+        $page = (isset($segment) && ctype_digit((string)$segment)) ? (int)$segment : 0;
+
+         $data['students'] = $this->StudentsModel->student_data($this->per_page, $page);
+		$data['student_user'] = null;
+         $data["links"] = $this->pagination->create_links();
+             
+
+		$this->load->view('students_details',$data);
+			
 	}
 
 	public function update_user($id){
+		$data = json_decode(file_get_contents('php://students_details'), true);
 
-		
-		null;
+		print_r($data);
+		die();
 		
 	}
 
@@ -42,10 +77,10 @@ class StudentsController extends CI_Controller {
 		$delete = $this->StudentsModel->delete_student($data);
 
 		if($delete){
-			$this->session->set_flashdata('deleteSuccess',"Details Removed Successfully");
+			$this->session->set_tempdata('deleteSuccess',"Details Removed Successfully",3);
 			redirect('student-details');
 		}else{
-			$this->session->set_flashdata('deleteError',"Check Data");
+			$this->session->set_tempdata('deleteError',"Check Data",3);
 			return false;
 		}
 	}
@@ -71,11 +106,11 @@ class StudentsController extends CI_Controller {
 				$query = $this->StudentsModel->add_student($form_data);
 
 				if($query){
-					$this->session->set_flashdata('userAdd',"New Student Added Successfully");
-					redirect('StudentsController/index');
+					$this->session->set_tempdata('userAdd',"New Student Added Successfully",3);
+					redirect('student-details');
 				}else{
-					$this->session->set_flashdata('AddError',"Uses not Added");
-					redirect('StudentsController/index');
+					$this->session->set_tempdata('AddError',"Uses not Added",3);
+					redirect('student-details');
 					
 				}
 			}else{

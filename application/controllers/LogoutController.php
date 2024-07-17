@@ -8,7 +8,7 @@ class LogoutController extends CI_Controller {
 		if($this->session->has_userdata('login_user')){
 
 			$this->session->unset_userdata('login_user');
-			$this->session->set_flashdata('LogOut',"Logout Successfull");
+			$this->session->set_tempdata('LogOut',"Logout Successfull",3);
 
 			return $this->load->view('login');
 
